@@ -6,7 +6,7 @@
 **Residência Tecnológica - Automação com Playwright**
 
 ### 🎯 Contexto:
-Este projeto foi desenvolvido como parte da **Residência Tecnológica**, um programa voltado para o desenvolvimento de habilidades práticas em áreas da tecnologia. Neste caso, o foco está na **Qualidade de Software (QA)** e na automação de testes utilizando a ferramenta **Playwright**.
+Este projeto foi desenvolvido como parte da **Residência Tecnológica**, um programa voltado para o desenvolvimento de habilidades práticas em áreas da tecnologia. Neste caso, o foco está na **Qualidade de Software (QA)** e na automação de testes utilizando a ferramenta **Playwright**, utilizando como base do nosso ambiente de testes o site *https://www.saucedemo.com/*
 
 ### 🎯 Objetivo:
 O principal objetivo do projeto é aplicar testes automatizados em aplicações web utilizando o Playwright, garantindo a qualidade e a confiabilidade das funcionalidades testadas. A proposta é familiarizar os participantes com ferramentas modernas de automação e boas práticas de testes.
@@ -15,10 +15,10 @@ O principal objetivo do projeto é aplicar testes automatizados em aplicações 
 - ✅ **Primeiro projeto prático de automação de testes** do grupo dentro da residência.
 - 🧠 Motivado pela necessidade de **garantir qualidade e cobertura de testes** em aplicações web.
 - 👥 Desenvolvido de forma colaborativa pelos residentes:
-  - 👨‍💻 **Leonardo Antonio**
-  - 👨‍💻 **Miguel Oliveira**
   - 👨‍💻 **Emmanuel Guerra**
-  - 👨‍💻 **Nicolas**
+  - 👨‍💻 **Leonardo Antonio**
+  - 👨‍💻 **Miguel Vieira**
+  - 👨‍💻 **Nicolas Klayvert**
 
 ---
 
