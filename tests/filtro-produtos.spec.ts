@@ -1,16 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 
-test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
 
-// Acessa a página de login
+test.describe('Filtragem de produtos', () => {
+    test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').click();
   await page.locator('[data-test="username"]').fill('standard_user');
   await page.locator('[data-test="password"]').click();
   await page.locator('[data-test="password"]').fill('secret_sauce');
   await page.locator('[data-test="login-button"]').click();
-
+    });
+test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
 
   // Espera-se que os itens sejam filtrados de a-z
   await page.locator('[data-test="product-sort-container"]').selectOption('az');
@@ -24,13 +25,6 @@ test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
 
 test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ page }) => {
 
-      await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
-    
    // Espera-se que os itens sejam filtrados de z-a
  await page.locator('[data-test="product-sort-container"]').selectOption('za');
  let ultimoProduto = await page.locator('.inventory_item_name ').first().textContent();
@@ -43,12 +37,6 @@ test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ 
 
 test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.99" como preço', async ({ page }) => {
 
-      await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
 
   // Espera-se  que os itens sejam filtrados do menor ao maior preço
  await page.locator('[data-test="product-sort-container"]').selectOption('lohi');
@@ -63,12 +51,7 @@ test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.
 });
 
 test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" e "49.99" como preço', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+ 
 
 // Espera-se que os itens sejam filtrador do maior ao menor preço.
   await page.locator('[data-test="product-sort-container"]').selectOption('hilo');
@@ -80,5 +63,30 @@ test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" 
    await expect(maiorPreco).toBe('$49.99');
    await expect(produtoMaisCaro).toBe('Sauce Labs Fleece Jacket');
 
+});
+});
+
+
+test.describe('Filtragem de produtos - CAMINHO C/ ERRO', () => { 
+    test.beforeEach(async ({ page }) => {
+  await page.goto('https://www.saucedemo.com/');
+  await page.locator('[data-test="username"]').click();
+  await page.locator('[data-test="username"]').fill('problem_user');
+  await page.locator('[data-test="password"]').click();
+  await page.locator('[data-test="password"]').fill('secret_sauce');
+  await page.locator('[data-test="login-button"]').click();
+   });
+test('Opções do filtro não selecionaveis', async ({ page }) => {
+
+   // seleciona filtro.
+   await page.locator('[data-test="product-sort-container"]').selectOption('za');
+
+   // recebe opção selecionada.
+   let opcaoAtual = await page.locator('span.active_option').textContent();
+  
+   // espera que não seja o filtro inicial.
+   await expect(opcaoAtual).not.toBe('Name (A to Z)');
+
+});
 });
 
