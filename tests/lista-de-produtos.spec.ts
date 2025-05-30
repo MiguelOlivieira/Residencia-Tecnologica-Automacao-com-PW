@@ -1,13 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { Logins } from '../users/logins';
 
   test('Pagina de produtos é apresentada após de login', async ({ page }) => {
     
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
     
   let endereco = await page.url();
   console.log("Endereço da página de produtos: " + endereco);
@@ -21,11 +19,8 @@ import { test, expect } from '@playwright/test';
   test('Os produtos devem ser exibidos com imagem, descrição, detalhes e preço', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
   let imagem = await page.locator('.inventory_item_img img').first().getAttribute('src');
   let descricao = await page.locator('.inventory_item_name').first().textContent();
@@ -49,11 +44,8 @@ import { test, expect } from '@playwright/test';
 test('Ao clicar no produto, deve ser exibida sua tela de informações', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
    await page.locator('[data-test="item-4-img-link"]').click();
    let enderecoProduto = "https://www.saucedemo.com/inventory-item.html?id=4";
@@ -66,11 +58,8 @@ test('Ao clicar no produto, deve ser exibida sua tela de informações', async (
 test('Da tela do produto, deve ser possível adicionar e remover itens do carrinho', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
   await page.locator('[data-test="item-4-img-link"]').click();
   await page.locator('[data-test="add-to-cart"]').click();
@@ -94,9 +83,8 @@ test('Da tela do produto, deve ser possível adicionar e remover itens do carrin
 test('Pagina de produtos é apresentada após de login - caminho c/erro', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('locked_out_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('locked_out_user', 'secret_sauce');
 
   await expect(page).not.toHaveURL('https://www.saucedemo.com/inventory.html');
 
@@ -110,9 +98,8 @@ test('Pagina de produtos é apresentada após de login - caminho c/erro', async 
 test('Os produtos devem ser exibidos com imagem, descrição, detalhes e preço - caminho c/erro', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
   const imagem = await page.locator('.item_inexistente_img img').first().getAttribute('src');
   const descricao = await page.locator('.nome_invalido').first().textContent();
@@ -134,9 +121,8 @@ test('Os produtos devem ser exibidos com imagem, descrição, detalhes e preço 
 test('Ao clicar no produto, deve ser exibida sua tela de informações - caminho c/erro', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
   await page.locator('[data-test="item-999-img-link"]').click();
 
@@ -149,9 +135,8 @@ test('Ao clicar no produto, deve ser exibida sua tela de informações - caminho
 test('Da tela do produto, deve ser possível adicionar e remover itens do carrinho - caminho c/erro', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
   await page.locator('[data-test="item-4-img-link"]').click();
 

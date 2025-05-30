@@ -1,16 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { log } from 'console';
+import { Logins } from '../users/logins';
 
 test('GerenciamentoDoCarrinhoExpected', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
 
   //Login na conta 
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('standard_user', 'secret_sauce');
 
   //Adicionar produto ao carrinho estando no menu principal
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -37,11 +35,8 @@ test('GerenciamentoDoCarrinhoError', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
 
   //Login na conta 
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('problem_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+   const loginUser = new Logins(page);
+   await loginUser.login('problem_user', 'secret_sauce');
 
 
   //Adicionar produto ao carrinho estando no menu principal

@@ -1,15 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { Logins } from '../users/logins';
 
 
 
 test.describe('Filtragem de produtos', () => {
     test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
     });
 test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
 
@@ -27,11 +25,12 @@ test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ 
 
    // Espera-se que os itens sejam filtrados de z-a
  await page.locator('[data-test="product-sort-container"]').selectOption('za');
- let ultimoProduto = await page.locator('.inventory_item_name ').first().textContent();
+ let primeiroProduto = await page.locator('.inventory_item_name ').first().textContent();
 
- console.log("Primeiro produto de z-a: " + ultimoProduto);
+ console.log("Primeiro produto de z-a: " + primeiroProduto);
 
- await expect(ultimoProduto).toBe('Test.allTheThings() T-Shirt (Red)');
+ //Espera-se que o primeiro produto de a-z seja Test.allTheThings() T-Shirt (Red)'
+ await expect(primeiroProduto).toBe('Test.allTheThings() T-Shirt (Red)');
 });
 
 
@@ -45,6 +44,7 @@ test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.
 
   console.log("O primeiro produto (menor preço): " + produtoMaisBarato + " e seu preço: " + menorPreco);
 
+  //Espera que o preço seja 7,99 e que o produto seja o Sauce Labs Onesie
   await expect(menorPreco).toBe('$7.99');
   await expect(produtoMaisBarato).toBe('Sauce Labs Onesie');
 
@@ -60,6 +60,7 @@ test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" 
 
   console.log("O primeiro produto (maior preço):  " + produtoMaisCaro + " e seu preço: " + maiorPreco);
 
+    //Espera que o preço seja 49,99 e que o produto seja o Sauce Labs Fleece Jacket
    await expect(maiorPreco).toBe('$49.99');
    await expect(produtoMaisCaro).toBe('Sauce Labs Fleece Jacket');
 
@@ -70,23 +71,19 @@ test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" 
 test.describe('Filtragem de produtos - CAMINHO C/ ERRO', () => { 
     test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('problem_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+    const loginUser = new Logins(page);
+    await loginUser.login('problem_user', 'secret_sauce');
    });
 test('Opções do filtro não selecionaveis', async ({ page }) => {
 
    // seleciona filtro.
    await page.locator('[data-test="product-sort-container"]').selectOption('za');
 
-   // recebe opção selecionada.
+   // variavel recebe o filtro selecionado.
    let opcaoAtual = await page.locator('span.active_option').textContent();
   
-   // espera que não seja o filtro inicial.
+   // espera que não seja o filtro padrão (A-Z). Resultará em erro.
    await expect(opcaoAtual).not.toBe('Name (A to Z)');
 
 });
 });
-
