@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { Logins } from '../users/logins';
 
 
-
+//Miguel Vieira
 test.describe('Filtragem de produtos', () => {
     test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
@@ -54,6 +54,7 @@ test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" 
  
 
 // Espera-se que os itens sejam filtrador do maior ao menor preço.
+
   await page.locator('[data-test="product-sort-container"]').selectOption('hilo');
    let produtoMaisCaro = await page.locator('.inventory_item_name').first().textContent();
   let maiorPreco = await page.locator('.inventory_item_price').first().textContent();
@@ -65,9 +66,23 @@ test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" 
    await expect(produtoMaisCaro).toBe('Sauce Labs Fleece Jacket');
 
 });
+
+test('Em caso de seleção multipla de filtros, apenas o primeiro será selecionado', async  ({page}) => {
+
+  //Espera-se que apenas o primeiro filtro selecionado seja computado
+
+  //Seleção de multiplos filtros
+   await page.locator('[data-test="product-sort-container"]').selectOption(['za', 'lohi']);
+
+  let opcaoAtual = await page.locator('span.active_option').textContent();
+
+  //Garantia de que apenas o primeiro selecionado seja carregado.
+  await expect(opcaoAtual).toBe('Name (Z to A)');
+
+});
 });
 
-
+//Miguel Vieira
 test.describe('Filtragem de produtos - CAMINHO C/ ERRO', () => { 
     test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
@@ -86,4 +101,26 @@ test('Opções do filtro não selecionaveis', async ({ page }) => {
    await expect(opcaoAtual).not.toBe('Name (A to Z)');
 
 });
+
 });
+
+//Miguel Vieira
+test('Seleção de 2 filtros ao mesmo tempo - CAMINHO C/ ERRO', async  ({page}) => {
+
+  await page.goto('https://www.saucedemo.com/');
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
+
+    //Multiplos filtros selecionados ao mesmo tempo
+   await page.locator('[data-test="product-sort-container"]').selectOption(['za', 'lohi']);
+
+  let opcaoAtual = await page.locator('span.active_option').textContent();
+
+  console.log("Filtro atual : " + opcaoAtual)
+  //Uma vez que a seleção de multiplos filtros vai contra a logica do site, espera-se que de erro.
+  await expect(opcaoAtual).toBe(['Name (Z to A)', 'Price (low to high)']);
+
+});
+
+     
+
