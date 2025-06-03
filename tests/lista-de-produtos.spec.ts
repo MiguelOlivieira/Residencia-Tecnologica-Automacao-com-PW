@@ -1,3 +1,9 @@
+/**
+* Ordenação (US-002)
+*
+*  Aluno responsável:  Miguel Vieira
+*/
+
 import { test, expect } from '@playwright/test';
 import { Logins } from '../users/logins';
 
