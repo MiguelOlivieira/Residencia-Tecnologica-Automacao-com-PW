@@ -1,7 +1,13 @@
+/**
+* Carrinho de compras (US-003)
+*
+*  Aluno responsável:  Emmanuel Guerra Maranhão
+*/
+
 import { test, expect } from '@playwright/test';
-import { log } from 'console';
 import { Logins } from '../users/logins';
 
+//*Teste 01: Adiciona o primeiro
 test('GerenciamentoDoCarrinhoExpected', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
@@ -18,7 +24,7 @@ test('GerenciamentoDoCarrinhoExpected', async ({ page }) => {
   //Recebe a quantidade de produtos no carrinho
 
   console.log("Você tem: "+produtosNoCarrinho+" produto(s) no carrinho.");
-  //Mostra no console a quantidade de produtos no carrinho
+  //Mostra no console a quantidade de produtos no ho
 
   //Remover o produto no menu principal
   await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
@@ -57,23 +63,16 @@ test('Exibição de produtos selecionados no carrinho', async ({page}) => {
 
     //Recebe informações do primeiro produto no carrinho
    let nomeProduto1 = await page
-                            .locator('.cart_item')
-                            .nth(0).locator('.cart_item_label')
                             .locator('.inventory_item_name')
                             .first()
                             .textContent();
                             
    let descProduto1 = await page
-                            .locator('.cart_item')
-                            .nth(0).locator('.cart_item_label')
                             .locator('.inventory_item_desc')
                             .first()
                             .textContent();
 
    let precoProduto1 = await page
-                            .locator('.cart_item')
-                            .nth(0)
-                            .locator('.cart_item_label')
                             .locator('.inventory_item_price')
                             .first()
                             .textContent();
@@ -81,26 +80,19 @@ test('Exibição de produtos selecionados no carrinho', async ({page}) => {
 
   //Recebe informações do segundo produto no carrinho
    let nomeProduto2 = await page
-                            .locator('.cart_item')
-                            .nth(1).locator('.cart_item_label')
                             .locator('.inventory_item_name')
-                            .first()
+                            .nth(1)
                             .textContent();
 
    let descProduto2 = await page
-                            .locator('.cart_item')
-                            .nth(1)
-                            .locator('.cart_item_label')
+ 
                             .locator('.inventory_item_desc')
-                            .first()
+                            .nth(1)
                             .textContent();
 
    let precoProduto2 = await page
-                            .locator('.cart_item')
-                            .nth(1)
-                            .locator('.cart_item_label')
                             .locator('.inventory_item_price')
-                            .first()
+                            .nth(1)
                             .textContent();
 //
 

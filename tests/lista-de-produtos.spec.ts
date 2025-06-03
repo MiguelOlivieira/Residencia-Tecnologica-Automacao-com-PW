@@ -3,16 +3,16 @@ import { Logins } from '../users/logins';
 
   test('Pagina de produtos é apresentada após de login', async ({ page }) => {
     
-  // Acessa a página de login
+  //Acessa a página de login
   await page.goto('https://www.saucedemo.com/');
    const loginUser = new Logins(page);
    await loginUser.login('standard_user', 'secret_sauce');
     
-  // Verifica se a URL da página de produtos é a esperada
+  //Verifica se a URL da página de produtos é a esperada
   let endereco = await page.url();
   console.log("Endereço da página de produtos: " + endereco);
 
-  // Verifica se a URL é a correta
+  //Verifica se a URL é a correta
   await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
   
 });
@@ -20,7 +20,7 @@ import { Logins } from '../users/logins';
 
   test('Os produtos devem ser exibidos com imagem, descrição, detalhes e preço', async ({ page }) => {
 
-  // Acessa a página de login
+  //Acessa a página de login
   await page.goto('https://www.saucedemo.com/');
    const loginUser = new Logins(page);
    await loginUser.login('standard_user', 'secret_sauce');

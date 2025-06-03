@@ -16,14 +16,14 @@ test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
   let primeiroProduto = await page.locator('.inventory_item_name').first().textContent();
 
   console.log("Primeiro produto de a-z: " + primeiroProduto);
-   //espera que primeiro produto seja Sauce Labs Backpack
+   //Espera que primeiro produto seja Sauce Labs Backpack
   await expect(primeiroProduto).toBe('Sauce Labs Backpack');
 
 });
 
 test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ page }) => {
 
-   // Espera-se que os itens sejam filtrados de z-a
+   //Espera-se que os itens sejam filtrados de z-a
  await page.locator('[data-test="product-sort-container"]').selectOption('za');
  let primeiroProduto = await page.locator('.inventory_item_name ').first().textContent();
 
@@ -37,7 +37,7 @@ test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ 
 test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.99" como preço', async ({ page }) => {
 
 
-  // Espera-se  que os itens sejam filtrados do menor ao maior preço
+  //Espera-se  que os itens sejam filtrados do menor ao maior preço
  await page.locator('[data-test="product-sort-container"]').selectOption('lohi');
  let produtoMaisBarato = await page.locator('.inventory_item_name').first().textContent();
  let menorPreco = await page.locator('.inventory_item_price').first().textContent();
@@ -53,7 +53,7 @@ test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.
 test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" e "49.99" como preço', async ({ page }) => {
  
 
-// Espera-se que os itens sejam filtrador do maior ao menor preço.
+//Espera-se que os itens sejam filtrador do maior ao menor preço.
 
   await page.locator('[data-test="product-sort-container"]').selectOption('hilo');
    let produtoMaisCaro = await page.locator('.inventory_item_name').first().textContent();
@@ -91,13 +91,13 @@ test.describe('Filtragem de produtos - CAMINHO C/ ERRO', () => {
    });
 test('Opções do filtro não selecionaveis', async ({ page }) => {
 
-   // seleciona filtro.
+   //Seleciona filtro.
    await page.locator('[data-test="product-sort-container"]').selectOption('za');
 
-   // variavel recebe o filtro selecionado.
+   //Variavel recebe o filtro selecionado.
    let opcaoAtual = await page.locator('span.active_option').textContent();
   
-   // espera que não seja o filtro padrão (A-Z). Resultará em erro.
+   //Espera que não seja o filtro padrão (A-Z). Resultará em erro.
    await expect(opcaoAtual).not.toBe('Name (A to Z)');
 
 });
