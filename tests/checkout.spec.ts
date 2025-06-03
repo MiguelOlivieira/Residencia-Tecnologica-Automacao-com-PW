@@ -125,3 +125,49 @@ test('Validar campos - Primeiro Nome em branco', async ({ page }) => {
     await expect(page.locator('[data-test="error"]')).toBeVisible();
     await expect(page.locator('[data-test="error"]')).toContainText('Error: First Name is required');
 });
+
+/**
+ * Teste 06:
+ * Validação: Campo Ultimo Nome em branco
+ * Deve exibir: "Error: Last Name is required"
+ */
+test('Validar campo - Último Nome em branco', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
+
+    await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await page.locator('[data-test="checkout"]').click();
+
+    await page.locator('[data-test="firstName"]').fill('Nicolas');
+    await page.locator('[data-test="postalCode"]').fill('90265');
+    await page.locator('[data-test="continue"]').click();
+
+    await expect(page.locator('[data-test="error"]')).toBeVisible();
+    await expect(page.locator('[data-test="error"]')).toContainText('Error: Last Name is required');
+});
+
+/**
+ * Teste 07:
+ * Validação: Campo CEP em branco
+ * Deve exibir: "Error: Postal Code is required"
+ */
+test('Validar campo - CEP em branco', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
+
+    await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await page.locator('[data-test="checkout"]').click();
+
+    await page.locator('[data-test="firstName"]').fill('Nicolas');
+    await page.locator('[data-test="lastName"]').fill('Nery');
+    await page.locator('[data-test="continue"]').click();
+
+    await expect(page.locator('[data-test="error"]')).toBeVisible();
+    await expect(page.locator('[data-test="error"]')).toContainText('Error: Postal Code is required');
+});
