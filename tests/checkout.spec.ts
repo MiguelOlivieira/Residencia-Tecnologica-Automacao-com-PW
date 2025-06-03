@@ -13,7 +13,6 @@ import { Logins } from '../users/logins';
 *   inserindo os dados do comprador (Primeiro nome, ultimo nome e CEP)
 */
 test('Concluir Compra', async ({ page }) => {
-
     await page.goto('https://www.saucedemo.com/');
 
     const loginUser = new Logins(page);
@@ -38,7 +37,6 @@ test('Concluir Compra', async ({ page }) => {
  *  inserindo os dados do comprador (Primeiro nome, ultimo nome e CEP)
 */
 test('Tela de Confirmação', async ({ page }) => {
-
     await page.goto('https://www.saucedemo.com/');
 
     const loginUser = new Logins(page);
@@ -82,6 +80,19 @@ test('Teste 3', async ({ page }) => {
 /**
  * Teste 04:
  *  Todos os campos devem ser obrigatórios
- * 
- * (Em andamento    ...)
+ *  Deve exibir: "Error: First Name is required"
  */
+test('Validar campos obrigatórios - Todos os campos em branco', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
+
+    await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await page.locator('[data-test="checkout"]').click();
+    await page.locator('[data-test="continue"]').click();
+
+    await expect(page.locator('[data-test="error"]')).toBeVisible();
+    await expect(page.locator('[data-test="error"]')).toContainText('Error: First Name is required');
+});
