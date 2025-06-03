@@ -8,7 +8,7 @@ import { test, expect } from '@playwright/test';
 import { Logins } from '../users/logins';
 
 /**
-* Teste 01:
+* Cenário - 01:
 *   Após adicionar pelo menos um item no carrinho, deve ser possível concluir a compra 
 *   inserindo os dados do comprador (Primeiro nome, ultimo nome e CEP)
 */
@@ -34,7 +34,7 @@ test('Concluir Compra', async ({ page }) => {
 });
 
 /** 
- * Teste 02:
+ * Cenário - 02:
  *  Após adicionar pelo menos um item no carrinho, deve ser possível concluir a compra 
  *  inserindo os dados do comprador (Primeiro nome, ultimo nome e CEP)
 */
@@ -59,7 +59,7 @@ test('Tela de Confirmação', async ({ page }) => {
 })
 
 /** 
- * Teste 03:
+ * Cenário - 03:
  *  A transação pode ser cancelada através do botão Cancel
 */
 test('Teste 3', async ({ page }) => {
@@ -84,7 +84,7 @@ test('Teste 3', async ({ page }) => {
 })
 
 /**
- * Teste 04:
+ * Cenário 04 - 01:
  *  Todos os campos devem ser obrigatórios
  *  Deve exibir: "Error: First Name is required"
  */
@@ -104,9 +104,9 @@ test('Validar campos obrigatórios - Todos os campos em branco', async ({ page }
 });
 
 /**
- * Teste 05:
- * Validação: Campo Primeiro Nome em branco
- * Deve exibir "Error: First Name is required"
+ * Cenário 04 - 02:
+ *  Validação: Campo Primeiro Nome em branco
+ *  Deve exibir "Error: First Name is required"
  */
 test('Validar campos - Primeiro Nome em branco', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/')
@@ -127,9 +127,9 @@ test('Validar campos - Primeiro Nome em branco', async ({ page }) => {
 });
 
 /**
- * Teste 06:
- * Validação: Campo Ultimo Nome em branco
- * Deve exibir: "Error: Last Name is required"
+ * Cenário 04 - 03:
+ *  Validação: Campo Ultimo Nome em branco
+ *  Deve exibir: "Error: Last Name is required"
  */
 test('Validar campo - Último Nome em branco', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/');
@@ -150,9 +150,9 @@ test('Validar campo - Último Nome em branco', async ({ page }) => {
 });
 
 /**
- * Teste 07:
- * Validação: Campo CEP em branco
- * Deve exibir: "Error: Postal Code is required"
+ * Cenário 04 - 04:
+ *  Validação: Campo CEP em branco
+ *  Deve exibir: "Error: Postal Code is required"
  */
 test('Validar campo - CEP em branco', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/');
