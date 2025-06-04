@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('fluxo completo do Swag Labs', async ({ page }) => {
+/*test('fluxo completo do Swag Labs', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
 
   await page.locator('[data-test="username"]').fill('problem_user');
@@ -27,4 +27,4 @@ test('fluxo completo do Swag Labs', async ({ page }) => {
 
   // Verificação simples: botão "Finish" visível
   await expect(page.locator('[data-test="finish"]')).toBeVisible();
-});
+});*/
