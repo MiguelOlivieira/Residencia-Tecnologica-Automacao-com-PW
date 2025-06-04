@@ -228,3 +228,28 @@ test('Validar limite de caracteres - Último Nome', async ({ page }) => {
     await page.locator('[data-test="postalCode"]').fill('90265');
     await page.locator('[data-test="continue"]').click();
 });
+
+/**
+ * Cenário 05 - 01:
+ * Validação: CEP com exatamente 8 números (válido)
+ * Deve aceitar e prosseguir normalmente
+ */
+test('Validar CEP - 8 números válidos', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
+
+    await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await page.locator('[data-test="checkout"]').click();
+
+    await page.locator('[data-test="firstName"]').fill('Nicolas');
+    await page.locator('[data-test="lastName"]').fill('Nery');
+
+    await page.locator('[data-test="postalCode"]').fill('12345678');
+
+    await page.locator('[data-test="continue"]').click();
+
+    await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-two.html');
+});
