@@ -1,5 +1,5 @@
 /**
-* Checkout (US-004)
+* Checkout (US-004) 
 *
 *  Aluno responsável:  Nicolas Klayvert
 */
@@ -170,4 +170,33 @@ test('Validar campo - CEP em branco', async ({ page }) => {
 
     await expect(page.locator('[data-test="error"]')).toBeVisible();
     await expect(page.locator('[data-test="error"]')).toContainText('Error: Postal Code is required');
+});
+
+/**
+ * Cenário 04 - 05
+ * Validação: Limitação de campos
+ * Primeiro Nome (150 caracteres)
+ */
+test('Validar limite de caracteres - Primeiro Nome', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+
+    const loginUser = new Logins(page);
+    await loginUser.login('standard_user', 'secret_sauce');
+
+    await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await page.locator('[data-test="checkout"]').click();
+
+    const longFirstName = 'A'.repeat(150);
+
+    await page.locator('[data-test="firstName"]').fill(longFirstName);
+    await page.locator('[data-test="lastName"]').fill('Nery');
+    await page.locator('[data-test="postalCode"]').fill('90265');
+
+    const firstNameValue = await page.locator('[data-test="firstName"]').inputValue();
+    expect(firstNameValue).toBe(longFirstName);
+
+    await page.locator('[data-test="continue"]').click();
+
+    await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-two.html');
 });
