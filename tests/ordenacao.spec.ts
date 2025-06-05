@@ -1,8 +1,15 @@
+/**
+* Ordenação (US-002)
+
+*
+*  Aluno responsável:  José Miguel Vieira Oliveira
+*/
+
+
 import { test, expect } from '@playwright/test';
 import { Logins } from '../users/logins';
 
 
-//Miguel Vieira
 test.describe('Filtragem de produtos', () => {
     test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
@@ -82,13 +89,9 @@ test('Em caso de seleção multipla de filtros, apenas o primeiro será selecion
 });
 });
 
-//Miguel Vieira
+
 test.describe('Filtragem de produtos - CAMINHO C/ ERRO', () => { 
-    test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.saucedemo.com/');
-    const loginUser = new Logins(page);
-    await loginUser.login('problem_user', 'secret_sauce');
-   });
+  
 test('Opções do filtro não selecionaveis', async ({ page }) => {
 
    //Seleciona filtro.
@@ -102,9 +105,6 @@ test('Opções do filtro não selecionaveis', async ({ page }) => {
 
 });
 
-});
-
-//Miguel Vieira
 test('Seleção de 2 filtros ao mesmo tempo - CAMINHO C/ ERRO', async  ({page}) => {
 
   await page.goto('https://www.saucedemo.com/');
@@ -122,5 +122,32 @@ test('Seleção de 2 filtros ao mesmo tempo - CAMINHO C/ ERRO', async  ({page}) 
 
 });
 
-     
+test('Filtragem quebrada/indisponível', async({ page }) => {
+ await page.goto('https://www.saucedemo.com/');
+    const loginUser = new Logins(page);
+    await loginUser.login('error_user', 'secret_sauce');
 
+
+
+    //Verifica o alerta de erro ao clicar em algum filtro
+    page.on('dialog', dialog => {
+    console.log(`Dialog message: ${dialog.message()}`);
+
+    //Caso apareça mensagem de erro
+        if(dialog.message().includes("Sorting is broken!")) {
+      console.log("O filtro está quebrado!");
+    }
+
+    // Verifica se o alert não contém o texto de erro. Como contém, falhará.
+    expect(dialog.message()).not.toContain('Sorting is broken!');
+    dialog.dismiss().catch(() => {}); //fecha o alert
+  });
+
+  await page.locator('[data-test="product-sort-container"]').selectOption('za');
+
+ 
+
+});
+
+     
+});

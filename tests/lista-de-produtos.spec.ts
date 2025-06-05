@@ -1,7 +1,7 @@
 /**
-* Ordenação (US-002)
+* Lista de Produtos (US-001)
 *
-*  Aluno responsável:  Miguel Vieira
+*  Aluno responsável:  Leonardo Antônio
 */
 
 import { test, expect } from '@playwright/test';

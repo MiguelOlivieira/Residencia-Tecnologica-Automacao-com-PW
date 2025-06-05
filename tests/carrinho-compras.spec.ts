@@ -36,7 +36,7 @@ test('GerenciamentoDoCarrinhoExpected', async ({ page }) => {
   
 });
 
-//Miguel Vieira
+//Emmanuel Guerra e Miguel Vieira
 test('Exibição de produtos selecionados no carrinho', async ({page}) => {
   await page.goto('https://www.saucedemo.com/');
 
@@ -120,7 +120,7 @@ test('Exibição de produtos selecionados no carrinho', async ({page}) => {
 
 });
 
-//Miguel Vieira
+//Emmanuel Guerra e Miguel Vieira
 test('Remoção de item diretamente do carrinho', async ({page}) => {
   await page.goto('https://www.saucedemo.com/');
 
@@ -149,7 +149,7 @@ test('Alterar quantidade de produtos e limitar a 99', async ({page}) => {
 
 });
 
-//Miguel Vieira
+//Emmanuel Guerra e Miguel Vieira
 test('Seguir com compra após clicar no botão Checkout', async ({page}) => {
  await page.goto('https://www.saucedemo.com/');
 
