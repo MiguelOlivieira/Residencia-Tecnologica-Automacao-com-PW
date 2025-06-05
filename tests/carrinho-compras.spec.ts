@@ -5,7 +5,7 @@
 */
 
 import { test, expect } from '@playwright/test';
-import { Logins } from '../users/logins';
+import { Logins } from '../users/Logins';
 
 //*Teste 01: Deve ser possível adicionar um produto ao carrinho através da tela inicial e o contador aumentar conforme a ocorrência
 //Emmanuel Guerra
@@ -270,13 +270,13 @@ test('Voltar a tela de produtos após clicar em "continue shopping" ', async ({p
     await page.locator('#continue-shopping').click();
     
     //Valida se o URL acessado no continue shopping é o correto
-    await expect(page).toHave(enderecoEsperado);
+    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
   console.log("Você voltou a pagina inicial!");
   
 });
 
-//Teste Error 01:
+//Teste Error 01:Deve ser possível remover um produto do carrinho na tela inicial e o contador diminuir conforme a ocorrência
 //Emmanuel Guerra
 test('RemoçãoProdutoTelaInicialError', async ({ page }) => {
 
@@ -300,8 +300,8 @@ test('RemoçãoProdutoTelaInicialError', async ({ page }) => {
 
   //Remover o produto no menu principal
   await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
-  
+ 
   await expect(page.locator('.shopping_cart_badge')).toHaveCount(0);
   //Valida se a remoção de produto foi bem sucedida
-
+  console.log("O número de produtos no carrinho não foi descontado");
 });
