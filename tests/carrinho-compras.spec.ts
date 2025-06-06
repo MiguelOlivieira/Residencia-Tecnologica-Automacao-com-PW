@@ -5,10 +5,13 @@
 */
 
 import { test, expect } from '@playwright/test';
-import { Logins } from '../users/Logins';
+import { Logins } from '../users/logins';
+
+
 
 //*Teste 01: Deve ser possível adicionar um produto ao carrinho através da tela inicial e o contador aumentar conforme a ocorrência
 //Emmanuel Guerra
+test.describe.only('Carrinho de compras', () => {
 test('Valida adição do Produto e contador', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
@@ -306,13 +309,12 @@ test('Voltar a tela de produtos após clicar em "continue shopping" ', async ({p
 
 });
 
-
+});
 
 //caminhos com erro
 
 
-
-
+test.describe('Carrinho de compras - CAMINHOS C/ ERRO', () => {
 test.describe('Caminhos com erro na página inicial', () =>{
 
 
@@ -644,6 +646,8 @@ test('Valida o botão de continue shopping', async ({ page }) => {
    console.log("O botão de continue shopping deveria estar com problema!");
     //Deveria dar erro,mas em nenhum usuário o botão tem problema.
   
+});
+
 });
 
 });

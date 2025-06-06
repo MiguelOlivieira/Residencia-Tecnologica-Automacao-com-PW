@@ -10,13 +10,21 @@ import { test, expect } from '@playwright/test';
 import { Logins } from '../users/logins';
 
 
-test.describe('Filtragem de produtos', () => {
+
+/* TESTE 01: Os produtos podem ser ordenados a partir de 4 opções de ordenação:
+* Name (A to Z): Ordena os produtos por nome em ordem crescente (A to Z)
+* Name (Z to A): Ordena os produtos por nome em ordem decrescente (Z to A)
+* Price (low to high): Ordenar os produtos do menor preço para o maior preço
+* Price (high to low): Ordenar os produtos do maior preço para o menor preço
+*/
+
+test.describe.only('Filtragem de produtos', () => {
     test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
     const loginUser = new Logins(page);
-    await loginUser.login('standard_user', 'secret_sauce');
+    await loginUser.login('standard_user', 'secret_sauce'); //loga com user padrão
     });
-test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
+test('Teste Filtro de a-z', async ({ page }) => {
 
   // Espera-se que os itens sejam filtrados de a-z
   await page.locator('[data-test="product-sort-container"]').selectOption('az');
@@ -28,7 +36,7 @@ test('Filtro de a-z, deve exibir Sauce Labs Backpack ', async ({ page }) => {
 
 });
 
-test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ page }) => {
+test('Teste Filtro de z-a', async ({ page }) => {
 
    //Espera-se que os itens sejam filtrados de z-a
  await page.locator('[data-test="product-sort-container"]').selectOption('za');
@@ -41,7 +49,7 @@ test('Filtro de z-a, deve exibir "Test.allTheThings() T-Shirt (Red)"', async ({ 
 });
 
 
-test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.99" como preço', async ({ page }) => {
+test('Teste Filtro do menor para o maior preço', async ({ page }) => {
 
 
   //Espera-se  que os itens sejam filtrados do menor ao maior preço
@@ -57,7 +65,7 @@ test('Filtro do menor para o maior preço, deve exibir "Sauce Labs Onesie" e "7.
 
 });
 
-test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" e "49.99" como preço', async ({ page }) => {
+test('Teste Filtro do maior para menor preço', async ({ page }) => {
  
 
 //Espera-se que os itens sejam filtrador do maior ao menor preço.
@@ -74,9 +82,10 @@ test('Filtro do maior para menor preço, deve exibir "Sauce Labs Fleece Jacket" 
 
 });
 
+
+//Teste - Apenas 1 opção de ordenação pode ser selecionada por vez
 test('Em caso de seleção multipla de filtros, apenas o primeiro será selecionado', async  ({page}) => {
 
-  //Espera-se que apenas o primeiro filtro selecionado seja computado
 
   //Seleção de multiplos filtros
    await page.locator('[data-test="product-sort-container"]').selectOption(['za', 'lohi']);
@@ -90,10 +99,15 @@ test('Em caso de seleção multipla de filtros, apenas o primeiro será selecion
 });
 
 
-test.describe('Filtragem de produtos - CAMINHO C/ ERRO', () => { 
-  
-test('Opções do filtro não selecionaveis', async ({ page }) => {
 
+//Caminhos de erro do Teste 01
+test.describe('Filtragem de produtos - CAMINHOS C/ ERRO', () => { 
+  
+//
+test('Opções do filtro não selecionaveis', async ({ page }) => {
+ await page.goto('https://www.saucedemo.com/');
+    const loginUser = new Logins(page);
+    await loginUser.login('standard', 'secret_sauce');
    //Seleciona filtro.
    await page.locator('[data-test="product-sort-container"]').selectOption('za');
 
