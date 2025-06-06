@@ -9,7 +9,7 @@ import { Logins } from '../users/Logins';
 
 //*Teste 01: Deve ser possível adicionar um produto ao carrinho através da tela inicial e o contador aumentar conforme a ocorrência
 //Emmanuel Guerra
-test('AdiçãoDeProdutoTelaInicial+ContadorAumentando', async ({ page }) => {
+test('Adição De Produto Tela Inicial + Contador Aumentando', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
 
@@ -25,7 +25,7 @@ test('AdiçãoDeProdutoTelaInicial+ContadorAumentando', async ({ page }) => {
   //Recebe a quantidade de produtos no carrinho
 
   console.log("Você adicionou o produto com sucesso!");
-  
+  //Mensagem para verificar se o teste rodou completamente
 
   console.log("Você tem: "+produtosNoCarrinho+" produto(s) no carrinho.");
   //Mostra no console a quantidade de produtos no carrinho
@@ -34,7 +34,7 @@ test('AdiçãoDeProdutoTelaInicial+ContadorAumentando', async ({ page }) => {
 
 //*Teste 02:Deve ser possível remover um produto do carrinho na tela inicial e o contador diminuir conforme a ocorrência
 //Emmanuel Guerra
-test('RemoçãoDeProdutoTelaInicial+ContadorReduzindo', async ({ page }) => {
+test('Remoção De Produto Tela Inicial + Contador Reduzindo', async ({ page }) => {
    await page.goto('https://www.saucedemo.com/');
 
   //Login na conta 
@@ -43,10 +43,6 @@ test('RemoçãoDeProdutoTelaInicial+ContadorReduzindo', async ({ page }) => {
    
   //Adicionar produto ao carrinho estando no menu principal
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-  let contador = await page.locator('.shopping_cart_badge');
-  let textoContador = await contador.textContent();
-  let produtosNoCarrinho = parseInt(textoContador || '0');
-  //Recebe a quantidade de produtos no carrinho
 
   //Remover o produto no menu principal
   await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
@@ -55,13 +51,14 @@ test('RemoçãoDeProdutoTelaInicial+ContadorReduzindo', async ({ page }) => {
   //Valida se a remoção de produto foi bem sucedida
 
   console.log("Você removeu o item com sucesso!");
-  
+  //Mensagem para verificar se o teste rodou completamente
+
 });
 
 //Emmanuel Guerra e Miguel Vieira
 //*Teste 03:Deve ser possível adicionar um produto ao carrinho na tela de produtos
 //Deve ser possível adicionar um produto ao carrinho estando na tela de visualização de produtos
-test('AdiçãoDeProdutoProductPage', async ({ page }) => {
+test('Adição De Produto Product Page', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
 
@@ -74,19 +71,16 @@ test('AdiçãoDeProdutoProductPage', async ({ page }) => {
   //Espera a pagina do item selecionado ser carregada
 
   await page.locator('#add-to-cart').click();
-  let contador = await page.locator('.shopping_cart_badge');
-  let textoContador = await contador.textContent();
-  let produtosNoCarrinho = parseInt(textoContador || '0');
-  //Recebe a quantidade de produtos no carrinho
+  //Espera a adição do produto ao carrinho
 
   console.log("O produto foi adicionado com sucesso!");
-
+  //Mensagem para verificar se o teste rodou completamente
 
 });
 
 //*Teste 04:Deve ser possível remover um produto do carrinho na tela de produtos
 //Emmanuel Guerra
-test('RemoçãoDeProdutoProductPage', async ({ page }) => {
+test('Remoção De Produto Product Page', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
 
@@ -99,10 +93,7 @@ test('RemoçãoDeProdutoProductPage', async ({ page }) => {
   //Espera a pagina do item selecionado ser carregada
 
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-  let contador = await page.locator('.shopping_cart_badge');
-  let textoContador = await contador.textContent();
-  let produtosNoCarrinho = parseInt(textoContador || '0');
-  //Recebe a quantidade de produtos no carrinho
+  //Espera a adição do produto ao carrinho
 
   //Remover o produto na Product Page
   await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
@@ -112,6 +103,7 @@ test('RemoçãoDeProdutoProductPage', async ({ page }) => {
 
 
   console.log("O produto foi removido com sucesso!");
+  //Mensagem para verificar se o teste rodou completamente
 
 });
 
@@ -165,7 +157,6 @@ test('Exibição de produtos selecionados no carrinho', async ({page}) => {
                             .textContent();
 
    let descProduto2 = await page
- 
                             .locator('.inventory_item_desc')
                             .nth(1)
                             .textContent();
@@ -181,8 +172,6 @@ test('Exibição de produtos selecionados no carrinho', async ({page}) => {
                 Preço do produto 1: "${precoProduto1}" `);
 
 
-
-
    console.log(`\nNome do produto 2: "${nomeProduto2}"\n 
                 Desc do produto 2: "${descProduto2}"\n 
                 Preço do produto 2: "${precoProduto2}" `);
@@ -194,10 +183,6 @@ test('Exibição de produtos selecionados no carrinho', async ({page}) => {
 
    expect([nomeProduto2, descProduto2, precoProduto2]).toEqual([nome2Esperado, desc2Esperada, preco2Esperado]);
    
-
-
-
-
 });
 
 //*Teste 06:No carrinho de compras deve ser possível remover o produto
@@ -213,7 +198,6 @@ test('Remoção de item diretamente do carrinho', async ({page}) => {
     //Ir até ao carrinho
     await page.locator('[data-test="shopping-cart-link"]').click();
 
-    
   //Remover o produto no carrinho
   await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
 
@@ -221,6 +205,7 @@ test('Remoção de item diretamente do carrinho', async ({page}) => {
   //Valida se a remoção de produto foi bem sucedida
 
   console.log("Você removeu o item com sucesso!");
+  //Mensagem para verificar se o teste rodou completamente
 
 });
 
@@ -245,6 +230,7 @@ test('Seguir com compra após clicar no botão Checkout', async ({page}) => {
     await expect(page).toHaveURL(enderecoEsperado);
 
     console.log("Checkout acessado com sucesso!");
+    //Mensagem para verificar se o teste rodou completamente
 
 });
 
@@ -259,8 +245,6 @@ test('Voltar a tela de produtos após clicar em "continue shopping" ', async ({p
    const loginUser = new Logins(page);
    await loginUser.login('standard_user', 'secret_sauce');
 
-   const enderecoEsperado = "https://www.saucedemo.com/inventory.html";
-
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
 
     //Ir até ao carrinho
@@ -273,12 +257,13 @@ test('Voltar a tela de produtos após clicar em "continue shopping" ', async ({p
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
   console.log("Você voltou a pagina inicial!");
-  
+  //Mensagem para verificar se o teste rodou completamente
+
 });
 
 //Teste Error 01:Deve ser possível remover um produto do carrinho na tela inicial e o contador diminuir conforme a ocorrência
 //Emmanuel Guerra
-test('RemoçãoProdutoTelaInicialError', async ({ page }) => {
+test('Remoção Produto Tela Inicial + Contador Diminuir Error', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/');
 
@@ -303,5 +288,104 @@ test('RemoçãoProdutoTelaInicialError', async ({ page }) => {
  
   await expect(page.locator('.shopping_cart_badge')).toHaveCount(0);
   //Valida se a remoção de produto foi bem sucedida
+
   console.log("O número de produtos no carrinho não foi descontado");
+  //Mensagem explicativa do erro
+
 });
+
+//Teste Error 02:Deve ser possível adicionar um produto do carrinho na tela inicial e o contador aumentar conforme a ocorrência
+//Emmanuel Guerra
+test('Adição Produto Tela Inicial + Contador Aumentar Error', async ({ page }) => {
+
+   await page.goto('https://www.saucedemo.com/');
+
+  //Login na conta 
+   const loginUser = new Logins(page);
+   await loginUser.login('error_user', 'secret_sauce');
+
+  await page.locator('[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]').click();
+  //Espera-se que o clique em adicionar ao carrinho fará o produto ser adicionado
+
+  //Espera-se que a adição do produto aumente a quantidade de produtos no carrinho
+  await expect(page.locator('.shopping_cart_badge')).toHaveCount(1);
+
+
+  console.log("A quantidade de produtos no carrinho não foi alterada!");
+  //Mensagem explicativa do erro
+
+});
+
+//Teste Error 03:Deve ser possível adicionar um produto do carrinho na tela de produto e o contador aumentar conforme a ocorrência
+//Emmanuel Guerra
+test('Adição Produto Tela de produto + Contador Aumentar Error', async ({ page }) => {
+
+await page.goto('https://www.saucedemo.com/');
+
+  //Login na conta 
+   const loginUser = new Logins(page);
+   await loginUser.login('error_user', 'secret_sauce');
+
+   await page.locator('.inventory_item_name').nth(2).click();
+   //Espera clicar no terceiro item da lista de produtos,o sauce labs bolt t-shirt
+
+   await expect(page).toHaveURL('https://www.saucedemo.com/inventory-item.html?id=1');
+   //Espera que a página do produto seja a mesma do selecionado
+
+   await page.locator('#add-to-cart').click();
+   //Clique para adicionar produto ao carrinho
+
+  await expect(page.locator('data-test="shopping-cart-link"')).toHaveCount(1);
+  //Valida se o produto foi adicionado ao carrinho
+  console.log("O produto não foi inserido ao carrinho!");
+  //Mensagem para facilitar a visualização do erro
+
+});
+
+//Teste Error 04:Deve ser possível remover um produto do carrinho na tela de produto e o contador remover conforme a ocorrência
+//Emmanuel Guerra
+test('Remover Produto Tela de produto + Contador Remover Error', async ({ page }) => {
+
+  await page.goto('https://www.saucedemo.com/');
+
+  //Login na conta 
+   const loginUser = new Logins(page);
+   await loginUser.login('error_user', 'secret_sauce');
+
+   await page.locator('#item_4_title_link').click();
+   //Espera que o primeiro item seja clicado
+
+   await expect(page).toHaveURL('https://www.saucedemo.com/inventory-item.html?id=4');
+   //Espera que a URL do produto seja a do mesmo clicado
+
+  await page.locator('#add-to-cart').click();
+   //Clique para adicionar produto ao carrinho
+
+
+  let contagem = page.locator('[data-test="shopping-cart-badge"]');
+  await expect(contagem).toBeVisible();
+  //Espera-se que os atributos de contagem sejam visíveis
+
+  let contadorTexto = await contagem.textContent();//Cria uma variável para guardar o texto pego pela variável contagem
+  let contador = parseInt(contadorTexto || '0');//Cria uma variável que transforma string em int para consulta posterior
+
+  console.log(`Você tem ${contador} item(s) no carrinho.`);
+  //Mostra a quantidade de itens no carrinho
+
+  await expect (contador == 0);
+  //Valida se o produto foi removido ao carrinho
+  console.log("O produto não foi removido do carrinho!");
+  //Mensagem para facilitar a visualização do erro
+
+  
+});
+
+
+//Teste Error 05:Deve ser possível adicionar um produto do carrinho na tela de produto e o contador aumentar conforme a ocorrência
+//Emmanuel Guerra
+/*test('Remover Produto Tela de produto + Contador Remover Error', async ({ page }) => {
+
+
+
+});*/
+
