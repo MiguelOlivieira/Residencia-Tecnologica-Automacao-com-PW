@@ -17,7 +17,7 @@ O principal objetivo do projeto é aplicar testes automatizados em aplicações 
 - 👥 Desenvolvido de forma colaborativa pelos residentes:
   - 👨‍💻 **Emmanuel Guerra**
   - 👨‍💻 **Leonardo Antonio**
-  - 👨‍💻 **Miguel Vieira**
+  - 👨‍💻 **José Miguel**
   - 👨‍💻 **Nicolas Klayvert**
 
 ---
@@ -83,6 +83,4 @@ Durante o desenvolvimento deste projeto, os integrantes adquiriram e fortalecera
 
 ## ✅ Conclusão
 
-O projeto **"Residência Tecnológica - Automação com Playwright"** representou uma experiência prática essencial no aprendizado de automação de testes de software. A equipe conseguiu aplicar conceitos de qualidade,
-integração contínua e testes automatizados, enfrentando desafios reais encontrados no desenvolvimento de aplicações web modernas. O uso de Playwright e integração com GitHub Actions demonstra o compromisso com a adoção de ferramentas
-profissionais e práticas de mercado. Finalizar este projeto com sucesso é um marco importante nossa formação.
+O projeto representou uma experiência prática essencial no aprendizado de automação de testes de software. A equipe conseguiu aplicar conceitos de qualidade, integração contínua e testes automatizados, enfrentando desafios reais encontrados no desenvolvimento de aplicações web modernas. O uso de Playwright e integração com GitHub Actions demonstra o compromisso com a adoção de ferramentas profissionais e práticas de mercado. Finalizar este projeto com sucesso é um marco importante nossa formação.
