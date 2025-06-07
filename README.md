@@ -38,7 +38,6 @@ O principal objetivo do projeto é aplicar testes automatizados em aplicações 
 
 - **`playwright-report/`**: Gera relatórios em HTML após a execução dos testes, facilitando a análise de falhas e execução.
 
-- **`test-results/`**: Armazena artefatos dos testes como vídeos, capturas de tela e logs.
 
 - **`.github/workflows/`**: Contém as configurações do GitHub Actions, permitindo integração contínua (CI) para rodar testes automaticamente em cada push ou pull request.
   
